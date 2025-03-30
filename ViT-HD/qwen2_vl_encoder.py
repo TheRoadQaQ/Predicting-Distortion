@@ -336,8 +336,3 @@ class Qwen2VLVisionEncoder(nn.Module):
             hidden_states_list.append(hidden_states)
         
         return hidden_states, hidden_states_list
-    
-if __name__ == "__main__":
-    config = Qwen2VLVisionConfig.from_pretrained("/apdcephfs_qy3/share_324462/roadma/models/Qwen2-VL-7B-Instruct")
-    model = Qwen2VLVisionEncoder(config)
-    print(model)

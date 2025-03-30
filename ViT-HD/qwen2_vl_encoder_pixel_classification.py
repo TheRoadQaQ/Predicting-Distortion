@@ -1,19 +1,19 @@
 from transformers.modeling_outputs import ImageClassifierOutput
-from .qwen2_vl_encoder import Qwen2VLVisionEncoder, Qwen2VLVisionConfig
+from qwen2_vl_encoder import Qwen2VLVisionEncoder, Qwen2VLVisionConfig
 from safetensors.torch import save_file, load_file
 import torch.nn.functional as F
 import torch
 import torch.nn as nn
 
-class Qwen2VLTForMalformPixelDetectionV1(nn.Module):
+class Qwen2VLTForMalformPixelDetection(nn.Module):
     def __init__(self, num_classes, model_path,  use_focal_loss = False, focal_alpha = 1.0, focal_gamma = 0.0):
-        super(Qwen2VLTForMalformPixelDetectionV1, self).__init__()
+        super(Qwen2VLTForMalformPixelDetection, self).__init__()
 
         config = Qwen2VLVisionConfig.from_pretrained(model_path)
         self.vision_encoder = Qwen2VLVisionEncoder(config)
-        state_dict = load_file('/apdcephfs_qy3/share_324462/roadma/distorted_detection/model/qwen2_vl_encoder.safetensors')
-        self.vision_encoder.load_state_dict(state_dict)
-
+        #state_dict = load_file('./qwen-vl-encoder.safetensors')
+        #self.vision_encoder.load_state_dict(state_dict)
+        print(self.vision_encoder)
         self.num_classes = num_classes
         self.patch_size = 14
 
